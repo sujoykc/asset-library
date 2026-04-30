@@ -1,0 +1,11 @@
+---
+bundle:
+  name: "entertainment_analyst_agent"
+  description: "An internal analytics and decision-support agent for an entertainment\
+    \ studio or streaming platform."
+resources:
+  agentflows:
+  - "entertainment_analyst"
+defaults:
+  variables:
+    ai_compute_key: "Select a compute"

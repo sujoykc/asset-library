@@ -1,0 +1,10 @@
+---
+bundle:
+  name: "customer_churn_workflow"
+  description: "An E2E pipeline for analyzing customer churn"
+resources:
+  jobs:
+  - "customer_churn_pipeline"
+defaults:
+  variables:
+    job_compute_key: "Select a compute"

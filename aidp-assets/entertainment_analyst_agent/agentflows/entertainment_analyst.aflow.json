@@ -1,0 +1,115 @@
+{
+  "displayName" : "entertainment_analyst",
+  "description" : "An internal analytics and decision-support agent for an entertainment studio or streaming platform.",
+  "pathInfo" : "${bundle.root}/.aidp/artifacts/Agent_flows",
+  "type" : "CANVAS",
+  "entryFilePath" : null,
+  "dependenciesFilePath" : null,
+  "computeKey" : "${var.ai_compute_key}",
+  "diagram" : {
+    "key" : "dd2cddfe-6f78-4f50-a127-a6d60a177249",
+    "displayName" : "entertainment_analyst",
+    "description" : "An internal analytics and decision-support agent for an entertainment studio or streaming platform.",
+    "nodes" : {
+      "bf1cc456-5095-4839-8a60-86a431d92468" : {
+        "type" : "AGENT",
+        "nodeType" : null,
+        "name" : "Entertainment_Release_Analyst",
+        "description" : "AGENT_description_194792",
+        "positionX" : 597.6051,
+        "positionY" : 163.37216,
+        "isExpanded" : null,
+        "parentNodeId" : null,
+        "configuration" : null,
+        "nodeTypeId" : null,
+        "key" : "bf1cc456-5095-4839-8a60-86a431d92468",
+        "timeCreated" : null,
+        "timeUpdated" : null,
+        "inputs" : null,
+        "outputs" : null,
+        "validationErrors" : null,
+        "instructions" : "You are an internal analytics and decision-support agent for an entertainment studio or streaming platform.\nYour primary objective is to help content strategy, release operations, marketing, and finance teams understand title performance, release effectiveness, and marketing ROI using a combination of:\n\n* Retrieval-Augmented Generation (RAG) over internal playbooks and policies\n* Strictly defined SQL tools that execute parameterized, read-only queries\n\nYou are not a customer support agent. You do not respond to end-user complaints, troubleshooting, or account issues.\n\nYou have access to the following authoritative internal documents via a RAG tool:\n* Content Strategy & Release Operations Playbook\n* Marketing Measurement & Attribution Guidelines\n* Distribution Window & Territory Rules\n\nThese documents define:\n\n* Metric definitions (e.g., completion rate, ROI)\n* Decision frameworks (e.g., green/yellow/red signals)\n* Release windows and territorial constraints\n* Attribution logic and interpretation rules\n\nIf a question involves definitions, policies, thresholds, or interpretation, you must consult the RAG tool before answering. \n\nIn addition, you have access to data via SQL tools. You can query performance data only through the provided SQL tools.\n\nEach SQL tool:\n* Executes one pre-defined parameterized query\n* Is read-only\n* Must be used exactly as defined (no query rewriting)\n\nYou must:\n\n1. Identify which tool(s) are relevant\n2. Populate the required parameters from the user’s question\n3. Call the tool(s)\n4. Interpret the results in business language\n\nNever invent data or estimate metrics that are not returned by a tool.\n\nReasoning and Tool-Use flow: \n\nFor every user question, follow this sequence:\n\n1. Classify the question\n* Definitions / policy → RAG required\n* Performance metrics → SQL tool required\n* Interpretation → RAG + SQL\n\n2. Retrieve knowledge if needed\n* Use RAG to fetch relevant guidance or definitions\n* Quote or paraphrase faithfully\n\n3. Query data\n* Call the appropriate SQL tool(s)\n* Validate parameters (dates, markets, title IDs, campaign IDs)\n\n4. Synthesize\n* Combine retrieved policy context with factual results\n* Highlight trends, risks, or opportunities\n\n5. Respond\n* Clear summary\n* Key metrics\n* Interpretation grounded in internal guidelines\n* Optional follow-up questions or next analyses\n\n\nResponse Style Guidelines \n* Be concise, analytical, and structured\n* Use bullet points and short sections\n* Clearly separate facts, interpretation, and recommendations\n* Use internal terminology as defined in the RAG documents\n* If data is missing or inconclusive, say so explicitly\n\nWhat you Must NOT do \n* Do not provide customer support or end-user guidance\n* Do not guess or fabricate metrics\n* Do not bypass SQL tools to answer data questions\n* Do not override or reinterpret official definitions from RAG content\n* Do not expose raw SQL or internal schema unless explicitly requested",
+        "llm" : {
+          "modelId" : "xai.grok-4.20-reasoning",
+          "provider" : "xai",
+          "regionId" : "us-phoenix-1"
+        },
+        "modelSettings" : null,
+        "memory" : null,
+        "tools" : [ {
+          "toolType" : "RAG",
+          "key" : "14ff8364-105c-4c7e-a9f2-596a1aecc893",
+          "displayName" : "internal_knowledge_sources_rag",
+          "workspaceKey" : null,
+          "description" : "\nThe description field is meant to clearly explain what the tool does, when it should be used, and what kind of outputs or effects it produces — in language that both developers and agents can understand.\n\nWhen writing the description, focus on:\n\n**Purpose:**\nExplain what the tool is designed to do in one clear sentence.\n\nExample: “This tool retrieves customer support tickets from a knowledge base and summarizes them by priority level.”\n\n**Intended Use / Context:**\nClarify when or why the tool should be called.\n\nExample: “Use this tool when the user asks for recent support issues, customer feedback summaries, or ticket resolution metrics.”\n\n**Inputs and Outputs (optional but helpful):**\nBriefly mention what inputs it takes and what kind of results it returns.\n\nExample: “Takes a customer ID as input and returns a structured summary of their active and closed tickets.”\n\n**Avoid Technical Jargon (for the model’s sake):**\nKeep it plain and action-oriented — think about how an LLM would “decide” to use the tool based on that text.\n\nGood example:  \n\"description\": \"Analyzes a given image and returns a classification label describing its main object. Use this tool when the user provides an image and asks what it depicts.\"\n\nBad Example:  \n\"description\": \"Uses a TensorFlow CNN model to output a top-1 prediction for the provided JPEG input.\"\n",
+          "isReference" : null,
+          "positionX" : 382.6051,
+          "positionY" : 308.37216,
+          "properties" : null,
+          "timeCreated" : null,
+          "timeUpdated" : null,
+          "createdBy" : null,
+          "updatedBy" : null,
+          "inputSchema" : {
+            "query" : ""
+          },
+          "toolConfig" : {
+            "catalogKey" : "entertainment",
+            "schemaKey" : "default",
+            "knowledgeBase" : "entertainment_analyst_kb",
+            "llm" : {
+              "modelId" : "xai.grok-4.20-reasoning",
+              "provider" : "xai",
+              "regionId" : "us-phoenix-1"
+            },
+            "modelSettings" : null,
+            "topK" : 5
+          }
+        }, {
+          "toolType" : "SQL",
+          "key" : "59688317-d049-48fa-99bf-10dce7fd1839",
+          "displayName" : "get_box_office_weekend",
+          "workspaceKey" : null,
+          "description" : "SELECT\n  t.title_name,\n  b.weekend_end_date,\n  b.market_code,\n  b.gross_usd_m,\n  b.screens,\n  b.rank\nFROM box_office_weekend b\nJOIN titles t ON t.title_id = b.title_id\nWHERE b.title_id = {{title_id}}\n  AND b.market_code = {{market_code}}",
+          "isReference" : null,
+          "positionX" : 623.0,
+          "positionY" : 403.0,
+          "properties" : null,
+          "timeCreated" : null,
+          "timeUpdated" : null,
+          "createdBy" : null,
+          "updatedBy" : null,
+          "inputSchema" : {
+            "title_id" : {
+              "name" : "title_id",
+              "type" : "string",
+              "description" : "The title ID of the movie. For example, T1002. If you are unsure, use the tool get_title_id. The last option is to ask the user.",
+              "defaultValue" : ""
+            },
+            "market_code" : {
+              "name" : "market_code",
+              "type" : "string",
+              "description" : "Market codes is a two letter representing the country or region where the movie is released. These are documented in our internal policy documents. An example is Japan being JP.",
+              "defaultValue" : ""
+            }
+          },
+          "toolConfig" : {
+            "catalogKey" : null,
+            "schemaKey" : null,
+            "query" : "SELECT\n  t.title_name,\n  b.weekend_end_date,\n  b.market_code,\n  b.gross_usd_m,\n  b.screens,\n  b.rank\nFROM box_office_weekend b\nJOIN titles t ON t.title_id = b.title_id\nWHERE b.title_id = {{title_id}}\n  AND b.market_code = {{market_code}}",
+            "isRowLimitEnabled" : null,
+            "maxRows" : null
+          }
+        } ]
+      }
+    },
+    "edges" : { },
+    "toolMap" : null,
+    "guardrailsMap" : null
+  },
+  "guardrails" : null,
+  "sessionConfig" : {
+    "variables" : { },
+    "sessionRetentionConfig" : null
+  }
+}
